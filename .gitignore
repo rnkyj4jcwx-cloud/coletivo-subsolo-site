@@ -1,0 +1,17 @@
+node_modules/
+.next/
+.vite/
+/dist/
+coverage/
+.DS_Store
+npm-debug.log*
+next-env.d.ts
+
+# Segredos e configurações locais nunca devem entrar no Git.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
