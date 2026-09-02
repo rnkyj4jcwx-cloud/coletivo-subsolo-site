@@ -51,3 +51,37 @@ describe("abertura do elevador", () => {
     expect(document.body.classList.contains("intro-locked")).toBe(false);
   });
 });
+
+describe("conteúdo institucional", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    cleanup();
+    document.body.className = "";
+    vi.runOnlyPendingTimers();
+    vi.useRealTimers();
+  });
+
+  it("apresenta missão, visão, atuação, processo e formas de parceria", () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: "pular entrada" }));
+
+    expect(screen.getByText("MISSÃO")).toBeTruthy();
+    expect(screen.getByText("VISÃO")).toBeTruthy();
+    expect(screen.getByText("EVENTOS E ENCONTROS")).toBeTruthy();
+    expect(screen.getByText("AVALIAÇÃO")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "FALAR COM O COLETIVO ↗" })).toBeTruthy();
+  });
+
+  it("identifica as cinco pessoas que organizam o coletivo", () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: "pular entrada" }));
+
+    ["VELARIS", "EVELYN", "RUKAS GUI", "LOUIS", "DAN"].forEach((name) => {
+      expect(screen.getByText(name)).toBeTruthy();
+      expect(screen.getByAltText(`Retrato de ${name}`)).toBeTruthy();
+    });
+  });
+});

@@ -1,16 +1,16 @@
 # Coletivo Subsolo
 
-Site teaser do Coletivo Subsolo, coletivo cultural dark e alternativo nascido em Itapevi.
+Site institucional do Coletivo Subsolo, coletivo cultural underground independente nascido em Itapevi.
 
-Versão atual: **v8**, validada em celulares Android e iOS, tablet e computadores.
+Versão atual: **institucional 2026.09**.
 
 ## O que o site apresenta
 
-- eventos musicais;
-- expositores independentes;
-- oficinas criativas;
-- manifesto e identidade do coletivo;
-- teaser para futuras convocações.
+- origem e posicionamento territorial;
+- missão, visão, pilares e valores;
+- frentes de atuação e processo de produção;
+- território, manifesto e possibilidades de parceria;
+- núcleo organizador do coletivo.
 
 ## Tecnologia
 
