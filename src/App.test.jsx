@@ -70,8 +70,8 @@ describe("conteúdo institucional", () => {
 
     expect(screen.getByText("MISSÃO")).toBeTruthy();
     expect(screen.getByText("VISÃO")).toBeTruthy();
-    expect(screen.getByText("EVENTOS E ENCONTROS")).toBeTruthy();
-    expect(screen.getByText("AVALIAÇÃO")).toBeTruthy();
+    expect(screen.getAllByText("EVENTOS E ENCONTROS").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("AVALIAÇÃO").length).toBeGreaterThan(0);
     expect(screen.getByRole("link", { name: "FALAR COM O COLETIVO ↗" })).toBeTruthy();
   });
 
@@ -83,5 +83,30 @@ describe("conteúdo institucional", () => {
       expect(screen.getByText(name)).toBeTruthy();
       expect(screen.getByAltText(`Retrato de ${name}`)).toBeTruthy();
     });
+  });
+
+  it("permite explorar pilares, frentes e o contra-fluxo sem expor blocos simultâneos", () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: "pular entrada" }));
+
+    fireEvent.click(screen.getByRole("tab", { name: /02MOVIMENTAR/ }));
+    expect(screen.getByRole("tabpanel", { name: /02MOVIMENTAR/ })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("tab", { name: /03COMUNICAÇÃO E MEMÓRIA/ }));
+    expect(screen.getByRole("tabpanel", { name: /03COMUNICAÇÃO E MEMÓRIA/ })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: /INVERTER O FLUXO/ }));
+    expect(screen.getByText("O ponto de partida também virou destino.")).toBeTruthy();
+  });
+
+  it("oferece um controle para pausar as animações contínuas", () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: "pular entrada" }));
+
+    const toggle = screen.getByRole("button", { name: "MOVIMENTO: ATIVO" });
+    fireEvent.click(toggle);
+
+    expect(document.body.classList.contains("motion-paused")).toBe(true);
+    expect(screen.getByRole("button", { name: "MOVIMENTO: PAUSADO" })).toBeTruthy();
   });
 });
